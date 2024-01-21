@@ -25,9 +25,17 @@ public class SecurityConfiguration {
     private String authLoginPath = "/auth/login";
     private String userPath = "/usuarios";
 
-    private String swaggerPath = "/macher/swagger-ui.html";
-    private String webjarsPath = "/macher/webjars/**";
-    private String swaggerUiPath = "/macher/swagger-ui/index.html";
+    private String swaggerPath = "/swagger-ui.html";
+    private String webjarsPath = "/webjars/**";
+    private String swaggerUiPath = "/swagger-ui/index.html";
+
+    private String swaggerApiDocsPath = "/v3/api-docs";
+    private String configurationUiPath = "/configuration/ui";
+    private String swaggerResourcesPath = "/swagger-resources/**";
+    private String configurationSecurityPath = "/configuration/security";
+    private String swaggerUiHtmlPath = "/swagger-ui.html";
+    private String swaggerUiStarPath = "/swagger-ui/*";
+    private String v3Path = "/v3/**";
     private String role = "ADMIN";
 
     @Bean
@@ -36,7 +44,11 @@ public class SecurityConfiguration {
                 .csrf(crsf -> crsf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.GET, swaggerPath, webjarsPath, swaggerUiPath).permitAll()
+                        .requestMatchers(HttpMethod.GET,
+                                swaggerApiDocsPath, webjarsPath, swaggerUiPath,
+                                configurationUiPath, swaggerResourcesPath,
+                                configurationSecurityPath, swaggerUiHtmlPath,
+                                swaggerUiStarPath, v3Path, swaggerPath).permitAll()
                         .requestMatchers(HttpMethod.POST, authRegisterPath).permitAll()
                         .requestMatchers(HttpMethod.POST, authLoginPath).permitAll()
                         .requestMatchers(HttpMethod.POST, userPath).hasRole(role)

@@ -42,7 +42,7 @@ A aplicação estará disponível em [http://localhost:8091](http://localhost:80
 
 Após iniciar a aplicação, você pode acessar a documentação Swagger em:
 
-- [Swagger UI](http://localhost:8080/macher/swagger-ui.html)
+- [Swagger UI](http://localhost:8091/macher/swagger-ui/index.html)
 
 A documentação Swagger fornece uma interface interativa para explorar e testar os endpoints da API.
 
