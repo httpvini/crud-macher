@@ -10,6 +10,7 @@ Este é um projeto Spring Boot que inclui um banco de dados MySQL. A aplicação
 
 ## Configuração do Banco de Dados
 
+O projeto ao ser executado vai criar as tabelas no banco de dados, por isso é essencial que antes de rodar o projeto, o banco de dados esteja rodando no container.
 Execute o seguinte comando para iniciar o banco de dados MySQL usando o Docker Compose:
 
 ```bash
@@ -30,6 +31,7 @@ Este comando irá compilar o projeto e executar os testes automatizados.
 
 ## Rodando a Aplicação
 
+Antes de rodar a aplicação certifique-se que o conteiner docker esteja rodando. (comando: docker ps)
 Para iniciar a aplicação Spring Boot, execute:
 
 ```bash
