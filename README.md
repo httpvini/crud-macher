@@ -48,7 +48,7 @@ A documentação Swagger fornece uma interface interativa para explorar e testar
 
 ## Autenticação
 
-A aplicação possui um endpoint post /macher/auth onde é possível criar a primeira credencial de usuário, passando uma api key. 
+A aplicação possui um endpoint post /macher/auth onde é possível criar a primeira credencial de usuário, passando uma api key que se encnotra no arquivo application.properties. 
 Esse endpoint deve ser utilizado somente para criar o primeiro admin do sistema. Todos os outros usuários 
 devem ser criados pelo endpoint post /macher/usuarios.
 
