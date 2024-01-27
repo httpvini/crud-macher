@@ -40,4 +40,9 @@ public class UsuarioAdapter implements UsuarioPort {
     public Optional<Usuario> findByCredencialUsuarioLogin(String login) {
         return usuarioRepository.findByCredencialUsuarioLogin(login);
     }
+
+    @Override
+    public Usuario findByCpf(String cpf) {
+        return usuarioRepository.findByCpf(cpf);
+    }
 }

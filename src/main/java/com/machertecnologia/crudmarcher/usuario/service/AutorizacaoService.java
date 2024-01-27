@@ -2,6 +2,7 @@ package com.machertecnologia.crudmarcher.usuario.service;
 
 import com.machertecnologia.crudmarcher.usuario.DTO.AtualizacaoUsuarioDTO;
 import com.machertecnologia.crudmarcher.usuario.adapter.CredencialUsuarioPort;
+import com.machertecnologia.crudmarcher.usuario.exception.UsuarioJaExisteException;
 import com.machertecnologia.crudmarcher.usuario.model.CredencialUsuario;
 import com.machertecnologia.crudmarcher.usuario.model.RoleUsuario;
 import com.machertecnologia.crudmarcher.usuario.model.Usuario;
@@ -30,9 +31,9 @@ public class AutorizacaoService implements UserDetailsService {
         return credencialUsuarioAdapter.getByLogin(username);
     }
 
-    public CredencialUsuario register(String login, String password, RoleUsuario role) throws Exception{
-        if(this.credencialUsuarioAdapter.getByLogin(login) != null){
-            throw new Exception("O usuário já existe");
+    public CredencialUsuario register(String login, String password, RoleUsuario role) {
+        if (this.credencialUsuarioAdapter.getByLogin(login) != null) {
+            throw new UsuarioJaExisteException("O usuário já existe: ", login);
         }
 
         String encryptedPasword = passwordEncoder.encode(password);
@@ -47,8 +48,8 @@ public class AutorizacaoService implements UserDetailsService {
 
     public CredencialUsuario update(Authentication authentication, AtualizacaoUsuarioDTO usuario, Usuario usuarioExistente) {
         CredencialUsuario credencialUsuario = null;
-        if(isAdmin(authentication)) {
-             credencialUsuario =
+        if (isAdmin(authentication)) {
+            credencialUsuario =
                     new CredencialUsuario(
                             Objects.requireNonNullElse(usuario.login(), usuarioExistente.getCredencialUsuario().getLogin()),
                             Objects.requireNonNullElse(passwordEncoder.encode(usuario.password()), usuarioExistente.getCredencialUsuario().getPassword()),

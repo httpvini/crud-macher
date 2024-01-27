@@ -19,4 +19,6 @@ public interface UsuarioPort {
     Usuario findByIdAndStatus(Long id, StatusRegistro statusRegistro);
 
     Optional<Usuario> findByCredencialUsuarioLogin(String login);
+
+    Usuario findByCpf(String cpf);
 }

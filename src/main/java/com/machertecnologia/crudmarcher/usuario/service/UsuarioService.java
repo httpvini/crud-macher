@@ -2,6 +2,7 @@ package com.machertecnologia.crudmarcher.usuario.service;
 
 import com.machertecnologia.crudmarcher.usuario.DTO.AtualizacaoUsuarioDTO;
 import com.machertecnologia.crudmarcher.usuario.adapter.CredencialUsuarioPort;
+import com.machertecnologia.crudmarcher.usuario.exception.UsuarioJaExisteException;
 import com.machertecnologia.crudmarcher.usuario.model.*;
 import com.machertecnologia.crudmarcher.usuario.adapter.UsuarioPort;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,11 @@ public class UsuarioService {
         return usuarioAdapter.findByCredencialUsuarioLogin(login);
     }
 
-    public Usuario criarUsuario(String cpf, String nome, LocalDate dataNascimento, Endereco endereco, String login, String password, RoleUsuario role) throws Exception {
+    public Usuario criarUsuario(String cpf, String nome, LocalDate dataNascimento, Endereco endereco, String login, String password, RoleUsuario role) {
+
+        if(this.usuarioAdapter.findByCpf(cpf) != null) {
+            throw new UsuarioJaExisteException("O usuário já existe: ", cpf);
+        }
 
         Authentication authentication = autorizacaoService.getAuthentication();
 

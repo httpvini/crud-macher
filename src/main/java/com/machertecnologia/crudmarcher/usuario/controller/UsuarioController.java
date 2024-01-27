@@ -42,21 +42,17 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity criarUsuario(@RequestBody CriarUsuarioDTO usuario) {
-        try {
-            Usuario usuarioResponse = usuarioService.criarUsuario(
-                    usuario.cpf(),
-                    usuario.nome(),
-                    usuario.dataNascimento(),
-                    usuario.endereco(),
-                    usuario.login(),
-                    usuario.password(),
-                    usuario.role()
-            );
-            Map<Long, UsuarioDTO> usuarioDTO = listaUsuariosMapper(Arrays.asList(usuarioResponse));
-            return ResponseEntity.ok(usuarioDTO);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(e);
-        }
+        Usuario usuarioResponse = usuarioService.criarUsuario(
+                usuario.cpf(),
+                usuario.nome(),
+                usuario.dataNascimento(),
+                usuario.endereco(),
+                usuario.login(),
+                usuario.password(),
+                usuario.role()
+        );
+        Map<Long, UsuarioDTO> usuarioDTO = listaUsuariosMapper(Arrays.asList(usuarioResponse));
+        return ResponseEntity.ok(usuarioDTO);
     }
 
     @DeleteMapping("/{id}")

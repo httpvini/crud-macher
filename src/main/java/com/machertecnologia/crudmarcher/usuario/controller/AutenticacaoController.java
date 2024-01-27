@@ -54,11 +54,7 @@ public class AutenticacaoController {
         RoleUsuario role = registroDTO.role();
         CredencialUsuario credencialUsuario;
 
-        try {
-            credencialUsuario = autorizacaoService.register(login, password, role);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("O usuário já existe");
-        }
+        credencialUsuario = autorizacaoService.register(login, password, role);
 
         return ResponseEntity.ok().body(credencialUsuario.getLogin());
     }

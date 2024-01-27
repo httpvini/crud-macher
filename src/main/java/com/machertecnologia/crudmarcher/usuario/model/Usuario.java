@@ -1,6 +1,7 @@
 package com.machertecnologia.crudmarcher.usuario.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,12 +13,20 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "O campo não pode ser vazio")
     @Column(nullable = false, unique = true)
     private String cpf;
+
+    @NotBlank(message = "O campo não pode ser vazio")
     @Column(nullable = false)
     private String nome;
+
+    @NotBlank(message = "O campo não pode ser vazio")
     @Column(nullable = false)
     private LocalDate dataNascimento;
+
+    @NotBlank(message = "O campo não pode ser vazio")
     @Embedded
     private Endereco endereco;
     @Enumerated(EnumType.STRING)
@@ -33,6 +42,8 @@ public class Usuario {
     private String usuarioAtualizacao;
     private LocalDateTime dataRemocao;
     private String usuarioRemocao;
+
+    @NotBlank(message = "O campo não pode ser vazio")
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "credencial_id")
     private CredencialUsuario credencialUsuario;
